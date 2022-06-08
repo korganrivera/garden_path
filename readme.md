@@ -27,19 +27,19 @@ Finding a solution for a 16 x 16 grid.
 
 ```
     p p p p p p p p p p p
-    p . . . . . . .   . p
-    p . p p p p p p p . p
-    p . p . . . . . p . p
-    p . p . p p p . p . p
-    p . p . p . p . p . p
-    p . p . p . p . p . p
-    p . p . p . p . p . p
-    p . p p p . p . p . p
-    p . . . . . p . p . p
-    p p p p p p p . p . p
-    . . . . . . . . p . p
-    p p p p p p p p p . p
-    p . . . . . . . . . p
+    p   | | | | | | |   p
+    p — p p p p p p p — p
+    p — p   | | |   p — p
+    p — p — p p p — p — p
+    p — p — p — p — p — p
+    p — p — p — p — p — p
+    p — p — p — p — p — p
+    p — p p p — p — p — p
+    p   | | |   p — p — p
+    p p p p p p p — p — p
+    | | | | | | |   p — p
+    p p p p p p p p p — p
+    p | | | | | | | |   p
     p p p p p p p p p p p
 ```
 
