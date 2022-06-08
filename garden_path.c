@@ -1,5 +1,5 @@
 /** 
- * Backtracking looped garden path maker.
+ * backtracking looped garden path maker.
  *
  * Starting at (0,0) in a given grid, generates paths in the space that don't cross themselves.
  * Path ends when it fails by getting stuck or when it succeeds by finding its origin point.
