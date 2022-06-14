@@ -61,7 +61,7 @@
 
 // grid dimensions
 #define R 9
-#define C 15
+#define C 14
 
 // directions used to set position.direction more easily.
 #define UP 1
@@ -81,6 +81,9 @@ void move(char array[R][C], position here, int first_move);     // Recursive fun
 void display_grid(char array[R][C]);
 
 int most_beds = 0;                                              // Holds the highest number of beds found so far.
+char first_move_direction;                                      // Remember first move direction so I can rule out some other moves later.
+
+
 
 int main(void){
     char grid[R][C];
@@ -266,14 +269,19 @@ void move(char array[R][C], position here, int first_move){
         }
     }
 
-// # TRIAL RULE: if x < 2, don't turn right. If you do, you'll create a path that will block a return to the origin.
-// Why does shit break when I remove this?
-    if(here.x < 2){
+// # TRIAL RULE: if x < 2, don't turn right. If you do, you'll create a path
+// that will block a return to the origin. Similar thing applies to an initial
+// right move.
+
+    if(first_move_direction == 'D' && here.x < 2){
         right = 0;
     }
 
-// # TRIAL RULE 2: You can't move onto a compost bin tile.
-// Now I can add no-go tiles.
+    else if(first_move_direction == 'R' && here.y < 2){
+        down = 0;
+    }
+
+// Don't move onto a restricted 'C' tile. ('C' for compost).
     if(here.x > 0 && array[here.x - 1][here.y] == 'C')
         up = 0;
 
@@ -315,6 +323,7 @@ void move(char array[R][C], position here, int first_move){
         here_copy = here;
         here_copy.direction = DOWN;
         here_copy.x = here.x + 1;
+        if(first_move) first_move_direction = 'D';
         move(array_copy, here_copy, 0);
     }
 
@@ -339,6 +348,7 @@ void move(char array[R][C], position here, int first_move){
         here_copy = here;
         here_copy.direction = RIGHT;
         here_copy.y = here.y + 1;
+        if(first_move) first_move_direction = 'R';
         move(array_copy, here_copy, 0);
     }
 }
@@ -349,9 +359,7 @@ void display_grid(char array[R][C]){
     // print blank space before top row of numbers.
     putchar(' ');
 
-    // Print line along the top. Backwards for loops are supposed to be
-    // quicker.
-
+    // Print line along the top.
     for(i = C; i--; )
         putchar('-');
 
